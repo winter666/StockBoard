@@ -4,7 +4,6 @@
       <h3 class="title">
         {{ $t('login.title') }}
       </h3>
-      <lang-select class="set-language" />
       <el-form-item prop="email">
         <span class="svg-container">
           <svg-icon icon-class="user" />
@@ -32,22 +31,17 @@
           Sign in
         </el-button>
       </el-form-item>
-      <div class="tips">
-        <span style="margin-right:20px;">Email: admin@laravue.dev</span>
-        <span>Password: laravue</span>
-      </div>
     </el-form>
   </div>
 </template>
 
 <script>
-import LangSelect from '@/components/LangSelect';
 import { validEmail } from '@/utils/validate';
 import { csrf } from '@/api/auth';
 
 export default {
   name: 'Login',
-  components: { LangSelect },
+  components: {},
   data() {
     const validateEmail = (rule, value, callback) => {
       if (!validEmail(value)) {
@@ -65,8 +59,8 @@ export default {
     };
     return {
       loginForm: {
-        email: 'admin@laravue.dev',
-        password: 'laravue',
+        email: '',
+        password: '',
       },
       loginRules: {
         email: [{ required: true, trigger: 'blur', validator: validateEmail }],

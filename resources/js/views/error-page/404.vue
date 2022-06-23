@@ -9,19 +9,15 @@
       </div>
       <div class="bullshit">
         <div class="bullshit__oops">
-          OOPS!
-        </div>
-        <div class="bullshit__info">
-          Copyright by
-          <a class="link-type" href="https://github.com/tuandm/laravue" target="_blank">Laravue</a>
+          Упс!
         </div>
         <div class="bullshit__headline">
           {{ message }}
         </div>
         <div class="bullshit__info">
-          Please check that the URL you entered is correct. Please click the button below to return to the homepage or send an error report.
+          Пожалуйста проверьте правильность URL-адреса, или нажмите на кнопку чтобы вернуться на домашнюю странницу.
         </div>
-        <a href="/" class="bullshit__return-home">Back to home</a>
+        <a href="/admin" class="bullshit__return-home">Вернуться</a>
       </div>
     </div>
   </div>
@@ -40,7 +36,7 @@ export default {
   },
   computed: {
     message() {
-      return 'The bodyguard said that you can\'t enter this page...';
+      return 'Странница не найдена';
     },
   },
 };
