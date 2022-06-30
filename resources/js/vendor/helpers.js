@@ -26,7 +26,7 @@ export default {
       return Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, length);
     },
     slug(str) {
-      const target = str.replace(/\s+/g, '-').toLowerCase();
+      const target = str.trim().replace(/\s+/g, '-').toLowerCase();
       const str_contain = target.split('');
       let str_result = '';
       const eng_chars = 'abcdefghigklmnopqrstuvwxyz'.split('');
@@ -36,6 +36,8 @@ export default {
         } else if (eng_chars.includes(char)) {
           str_result += char;
         } else if (char === '-') {
+          str_result += char;
+        } else if (parseInt(char)) {
           str_result += char;
         }
       });
