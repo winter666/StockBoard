@@ -15,6 +15,12 @@ class SyncronizationRepository implements SyncronizationRepositoryInterface
         return Syncronization::all();
     }
 
+    public function paginate($limit = 15)
+    {
+        return Syncronization::query()->orderBy('id', 'desc')
+            ->paginate($limit);
+    }
+
     public function get(int $id)
     {
         return Syncronization::query()->find($id);

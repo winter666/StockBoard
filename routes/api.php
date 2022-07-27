@@ -40,6 +40,10 @@ Route::namespace('Api')->group(function() {
         Route::put('users/{user}/permissions', 'UserController@updatePermissions')->middleware('permission:' .Acl::PERMISSION_PERMISSION_MANAGE);
         Route::get('roles/{role}/permissions', 'RoleController@permissions')->middleware('permission:' . Acl::PERMISSION_PERMISSION_MANAGE);
     });
+
+    Route::namespace('Admin')->group(function() {
+        require 'api/admin/sync.php';
+    });
 });
 
 // Fake APIs

@@ -87,13 +87,14 @@ export const constantRoutes = [
     ],
   },
   {
-    path: '/catalog',
+    path: '/integration-logs',
     component: Layout,
     children: [
       {
         path: '',
-        name: 'Catalog',
-        meta: { title: 'catalog', icon: 'excel', noCache: false },
+        name: 'IntegrationLogs',
+        component: () => import('@/views/integration-logs'),
+        meta: { title: 'integration_logs', icon: 'excel', noCache: true },
       },
     ],
   },

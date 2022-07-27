@@ -12,6 +12,11 @@
         <template slot-scope="scope">
           <span v-if="column.render">{{ column.render(scope.row) }}</span>
           <span v-else-if="column.renderAsHTML" v-html="column.renderAsHTML(scope.row)" />
+          <span v-else-if="column.tag">
+            <el-tag :type="column.tag.getType(scope.row)">
+              {{ column.tag.getContent ? column.tag.getContent(scope.row[column.key]) : scope.row[column.key] }}
+            </el-tag>
+          </span>
           <span v-else>{{ scope.row[column.key] }}</span>
         </template>
       </el-table-column>
