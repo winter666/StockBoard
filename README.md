@@ -1,2 +1,2 @@
-# BaseLaravuePlatform
+# API for investment app
 
