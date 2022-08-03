@@ -9,8 +9,8 @@ use Illuminate\Console\Command;
 
 class SyncCBRFCommand extends Command
 {
-    protected $signature = 'currency:sync';
-    protected $description = 'Command for sync currency from CBRF';
+    protected $signature = 'currency:rub';
+    protected $description = 'Command for sync currency (RUB to another) from CBRF';
     protected CBRFAPI $api;
 
     public function __construct()
