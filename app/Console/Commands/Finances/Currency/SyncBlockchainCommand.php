@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands\Finances\Currency;
 
+use App\Repositories\Analytics\BitcoinAnalyticRepository;
 use App\Repositories\Finances\BitcoinCurrencyRepository;
 use App\Services\API\Finances\Currency\BlockchainAPI;
 use Illuminate\Console\Command;
@@ -19,7 +20,7 @@ class SyncBlockchainCommand extends Command
         $this->api = new BlockchainAPI();
     }
 
-    public function handle(BitcoinCurrencyRepository $bitcoinCurrencyRepository)
+    public function handle(BitcoinCurrencyRepository $bitcoinCurrencyRepository, BitcoinAnalyticRepository $bitcoinAnalyticRepository)
     {
         $tickerResponseBody = json_decode($this->api
             ->ticker()
@@ -28,12 +29,13 @@ class SyncBlockchainCommand extends Command
         foreach ($tickerResponseBody as $key => $tick) {
             $data = [
                 'char_code' => $tick->symbol,
-                'last_value' => $tick->last,
-                'buy_value' => $tick->buy,
-                'sell_value' => $tick->sell,
+                'last_value' => (double)$tick->last,
+                'buy_value' => (double)$tick->buy,
+                'sell_value' => (double)$tick->sell,
             ];
 
             $bitcoinCurrencyRepository->updateOrCreate(['char_code' => $data['char_code']], $data);
+            $bitcoinAnalyticRepository->storeOnceADay(['char_code' => $data['char_code']], $data);
         }
 
         return 0;
