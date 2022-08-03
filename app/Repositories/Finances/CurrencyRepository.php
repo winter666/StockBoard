@@ -19,7 +19,7 @@ class CurrencyRepository implements CurrencyRepositoryInterface
         return Currency::all();
     }
 
-    public function get(int $id): Model
+    public function get(int $id): Model|null
     {
         return Currency::query()->find($id);
     }
@@ -39,5 +39,10 @@ class CurrencyRepository implements CurrencyRepositoryInterface
                 'external_id' => $currency->external_id,
             ], $currency->toArray());
         }
+    }
+
+    public function create(array $data): Model
+    {
+        return Currency::query()->create($data);
     }
 }

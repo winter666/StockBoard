@@ -15,6 +15,4 @@ interface SyncronizationRepositoryInterface extends ModelRepository
     public function getFailed();
 
     public function getInProgress();
-
-    public function create(array $data);
 }

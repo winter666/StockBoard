@@ -16,9 +16,9 @@ class CreateBitcoinCurrenciesTable extends Migration
         Schema::create('bitcoin_currencies', function (Blueprint $table) {
             $table->id();
             $table->string('char_code');
-            $table->string('last_value');
-            $table->string('buy_value');
-            $table->string('sell_value');
+            $table->double('last_value');
+            $table->double('buy_value');
+            $table->double('sell_value');
             $table->timestamps();
         });
     }

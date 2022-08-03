@@ -18,7 +18,7 @@ class CreateTariffsTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->jsonb('attributes')->nullable();
-            $table->decimal('price');
+            $table->double('price');
             $table->integer('time')->nullable();
             $table->timestamps();
         });

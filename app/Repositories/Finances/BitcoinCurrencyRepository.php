@@ -17,7 +17,7 @@ class BitcoinCurrencyRepository implements BitcoinCurrencyRepositoryInterface
         return BitcoinCurrency::all();
     }
 
-    public function get(int $id): Model
+    public function get(int $id): Model|null
     {
         return BitcoinCurrency::query()->find($id);
     }
@@ -25,5 +25,10 @@ class BitcoinCurrencyRepository implements BitcoinCurrencyRepositoryInterface
     public function updateOrCreate(array $needle, array $data): Model
     {
         return BitcoinCurrency::query()->updateOrCreate($needle, $data);
+    }
+
+    public function create(array $data): Model
+    {
+        return BitcoinCurrency::query()->create($data);
     }
 }

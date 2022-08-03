@@ -18,7 +18,7 @@ class ClientRepository implements ClientRepositoryInterface
         return Client::all();
     }
 
-    public function get(int $id): Model
+    public function get(int $id): Model|null
     {
         return Client::query()->find($id);
     }

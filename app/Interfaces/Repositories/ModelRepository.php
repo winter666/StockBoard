@@ -11,5 +11,7 @@ interface ModelRepository
 {
     public function all(): Collection;
 
-    public function get(int $id): Model;
+    public function get(int $id): Model|null;
+
+    public function create(array $data): Model;
 }

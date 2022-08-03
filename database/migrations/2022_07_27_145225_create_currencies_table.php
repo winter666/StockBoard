@@ -19,8 +19,8 @@ class CreateCurrenciesTable extends Migration
             $table->string('number_code');
             $table->string('char_code');
             $table->string('external_id')->index();
-            $table->decimal('nominal');
-            $table->decimal('value');
+            $table->double('nominal');
+            $table->double('value');
             $table->timestamps();
         });
     }

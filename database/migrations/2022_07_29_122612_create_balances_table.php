@@ -16,7 +16,7 @@ class CreateBalancesTable extends Migration
         Schema::create('balances', function (Blueprint $table) {
             $table->id();
             $table->string('type')->default('RUB');
-            $table->decimal('value')->default(0);
+            $table->double('value')->default(0);
             $table->unsignedBigInteger('client_id');
             $table->foreign('client_id')
                 ->references('id')

@@ -23,7 +23,7 @@ class SyncronizationRepository implements SyncronizationRepositoryInterface
             ->paginate($limit);
     }
 
-    public function get(int $id): Model
+    public function get(int $id): Model|null
     {
         return Syncronization::query()->find($id);
     }
@@ -54,7 +54,7 @@ class SyncronizationRepository implements SyncronizationRepositoryInterface
             ->get();
     }
 
-    public function create(array $data)
+    public function create(array $data): Model
     {
         return Syncronization::query()->create($data);
     }
