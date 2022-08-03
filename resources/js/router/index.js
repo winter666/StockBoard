@@ -87,14 +87,22 @@ export const constantRoutes = [
     ],
   },
   {
-    path: '/integration-logs',
+    path: '/clients',
+    redirect: 'noredirect',
     component: Layout,
     children: [
       {
-        path: '',
-        name: 'IntegrationLogs',
-        component: () => import('@/views/integration-logs'),
-        meta: { title: 'integration_logs', icon: 'excel', noCache: true },
+        path: 'list',
+        component: () => import('@/views/clients/List'),
+        name: 'ClientsList',
+        meta: { title: 'clients', icon: 'peoples', noCache: true },
+      },
+      {
+        path: 'edit/:id?',
+        component: () => import('@/views/clients/Edit'),
+        name: 'ClientEdit',
+        meta: { title: 'client_edit', noCache: true },
+        hidden: true,
       },
     ],
   },

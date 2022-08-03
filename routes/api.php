@@ -43,6 +43,7 @@ Route::namespace('Api')->group(function() {
 
     Route::namespace('Admin')->group(function() {
         require 'api/admin/sync.php';
+        require 'api/admin/clients.php';
     });
 });
 

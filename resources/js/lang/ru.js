@@ -1,6 +1,7 @@
 export default {
   route: {
-    integration_logs: 'Логи Интеграций',
+    clients: 'Клиенты',
+    client_edit: 'Редактирование клиента',
     dashboard: 'Панель управления',
     permission: 'Права',
     pagePermission: 'Страница прав',
