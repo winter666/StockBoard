@@ -6,18 +6,20 @@ namespace App\Repositories\Finances;
 
 use App\Collections\Finances\Currency\CurrencyCollection;
 use App\Collections\Finances\Currency\CurrencyCollectionItem;
-use App\Interfaces\Finances\CurrencyRepositoryInterface;
+use App\Interfaces\Repositories\Finances\CurrencyRepositoryInterface;
 use App\Models\Finances\Currency\Currency;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 class CurrencyRepository implements CurrencyRepositoryInterface
 {
 
-    public function all()
+    public function all(): Collection
     {
         return Currency::all();
     }
 
-    public function get(int $id)
+    public function get(int $id): Model
     {
         return Currency::query()->find($id);
     }

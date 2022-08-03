@@ -1,5 +1,8 @@
 <template>
   <div class="abstract-table">
+    <div class="panel">
+      <el-button v-if="actions.includes(action_create)" type="primary" icon="el-icon-circle-plus" @click="handleCreate">Добавить</el-button>
+    </div>
     <el-table v-loading="isOnLoad" :data="data" row-key="id" border fit highlight-current-row style="width: 100%">
       <el-table-column
         v-for="(column, index) in columns"
@@ -42,7 +45,7 @@ export default {
   props: {
     data: { type: Array, required: true },
     withActions: { type: Boolean, required: false, default: false },
-    actions: { type: Array, required: false, default: () => ['edit', 'delete'] },
+    actions: { type: Array, required: false, default: () => ['edit', 'delete', 'create'] },
     isOnLoad: { type: Boolean, required: false, default: false },
     columns: { type: Array, required: true },
     target: { type: String, required: true },
@@ -51,9 +54,13 @@ export default {
     return {
       action_edit: 'edit',
       action_delete: 'delete',
+      action_create: 'create',
     };
   },
   methods: {
+    handleCreate() {
+      this.$router.push({ path: `/${this.target}/edit` });
+    },
     handleDelete(id) {
       this.$confirm(`Вы уверены, что хотите позицию с ID: ${id}?`, 'Внимание', {
         confirmButtonText: 'OK',
@@ -73,5 +80,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .panel {
+    margin-bottom: 15px;
+  }
 </style>

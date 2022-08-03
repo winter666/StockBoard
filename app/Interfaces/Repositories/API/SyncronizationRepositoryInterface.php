@@ -1,15 +1,13 @@
 <?php
 
 
-namespace App\Interfaces\API;
+namespace App\Interfaces\Repositories\API;
 
 
-interface SyncronizationRepositoryInterface
+use App\Interfaces\Repositories\ModelRepository;
+
+interface SyncronizationRepositoryInterface extends ModelRepository
 {
-    public function all();
-
-    public function get(int $id);
-
     public function getByStatus(string $status);
 
     public function getCompleted();

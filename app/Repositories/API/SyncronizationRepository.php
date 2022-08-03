@@ -4,13 +4,15 @@
 namespace App\Repositories\API;
 
 
-use App\Interfaces\API\SyncronizationRepositoryInterface;
+use App\Interfaces\Repositories\API\SyncronizationRepositoryInterface;
 use App\Models\API\Syncronization;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 class SyncronizationRepository implements SyncronizationRepositoryInterface
 {
 
-    public function all()
+    public function all(): Collection
     {
         return Syncronization::all();
     }
@@ -21,7 +23,7 @@ class SyncronizationRepository implements SyncronizationRepositoryInterface
             ->paginate($limit);
     }
 
-    public function get(int $id)
+    public function get(int $id): Model
     {
         return Syncronization::query()->find($id);
     }
