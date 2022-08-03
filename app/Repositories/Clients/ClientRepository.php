@@ -23,6 +23,28 @@ class ClientRepository implements ClientRepositoryInterface
         return Client::query()->find($id);
     }
 
+    public function getOrFail(int $id): Model
+    {
+        return Client::query()->findOrFail($id);
+    }
+
+    public function update(int $id, array $data): Model {
+        $client = $this->getOrFail($id);
+        $client->update($data);
+        return $client;
+    }
+
+    public function delete(int $id)
+    {
+        $client = $this->getOrFail($id);
+        $client->delete();
+    }
+
+    public function create(array $data): Model
+    {
+        return Client::query()->create($data);
+    }
+
     public function allOrderByIdDesc(): Collection
     {
         return Client::query()

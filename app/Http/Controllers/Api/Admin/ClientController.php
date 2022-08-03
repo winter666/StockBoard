@@ -22,12 +22,12 @@ class ClientController extends Controller
         return ClientResource::collection($clientRepository->paginateOrderByIdDesc($limit));
     }
 
-    public function store(ClientStoreFormRequest $request): JsonResponse|ClientResource
+    public function store(ClientStoreFormRequest $request, ClientRepository $clientRepository): JsonResponse|ClientResource
     {
         try {
             $data = $request->all();
             $data['password'] = Hash::make($data['password']);
-            $client = Client::query()->create($data);
+            $client = $clientRepository->create($data);
             return ClientResource::make($client);
         } catch (\Exception $e) {
             Log::debug($e->getMessage(), $e->getTrace());
@@ -35,10 +35,10 @@ class ClientController extends Controller
         }
     }
 
-    public function show($id)
+    public function show(ClientRepository $clientRepository, $id)
     {
         try {
-            $client = Client::query()->find($id);
+            $client = $clientRepository->get($id);
             return ClientResource::make($client);
         } catch (ModelNotFoundException $e) {
             return json_error(404);
@@ -48,12 +48,11 @@ class ClientController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, ClientRepository $clientRepository, $id)
     {
         try {
             $data = $request->all();
-            $client = Client::query()->findOrFail($id);
-            $client->update($data);
+            $client = $clientRepository->update($id, $data);
             return ClientResource::make($client);
         } catch (ModelNotFoundException $e) {
             return json_error(404);
@@ -63,10 +62,10 @@ class ClientController extends Controller
         }
     }
 
-    public function destroy($id)
+    public function destroy(ClientRepository $clientRepository, $id)
     {
         try {
-            Client::destroy([$id]);
+            $clientRepository->delete($id);
             return response()->json([], 204);
         } catch (ModelNotFoundException $e) {
             return json_error(404);
