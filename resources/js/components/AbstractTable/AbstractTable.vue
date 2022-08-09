@@ -1,7 +1,7 @@
 <template>
   <div class="abstract-table">
     <div class="panel">
-      <el-button v-if="actions.includes(action_create)" type="primary" icon="el-icon-circle-plus" @click="handleCreate">Добавить</el-button>
+      <el-button v-if="withActions && actions.includes(action_create)" type="primary" icon="el-icon-circle-plus" @click="handleCreate">Добавить</el-button>
     </div>
     <el-table v-loading="isOnLoad" :data="data" row-key="id" border fit highlight-current-row style="width: 100%">
       <el-table-column
