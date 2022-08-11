@@ -12,4 +12,6 @@ interface BitcoinAnalyticRepositoryInterface extends ModelRepository
     public function create(array $data): Model;
 
     public function storeOnceADay(array $needle, array $data);
+
+    public function graphFormat(): array;
 }

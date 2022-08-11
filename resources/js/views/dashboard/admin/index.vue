@@ -2,9 +2,15 @@
   <div class="dashboard-editor-container">
     <panel-group @handleSetLineChartData="handleSetLineChartData" />
 
-    <!--    <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">-->
-    <!--      <line-chart :chart-data="lineChartData" />-->
-    <!--    </el-row>-->
+    <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
+      <line-chart
+        :chart-data="currencyData.analytics"
+        :chart-days="currencyData.dates"
+        :chart-values="currencyData.values"
+        :chart-legend="currencyData.legend"
+        chart-name="Курс Bitcoin к валютам"
+      />
+    </el-row>
 
     <!--    <el-row :gutter="32">-->
     <!--      <el-col :xs="24" :sm="24" :lg="8">-->
@@ -57,7 +63,7 @@
 
 <script>
 import PanelGroup from './components/PanelGroup';
-// import LineChart from './components/LineChart';
+import LineChart from './components/LineChart';
 // import RaddarChart from './components/RaddarChart';
 // import PieChart from './components/PieChart';
 // import BarChart from './components/BarChart';
@@ -65,6 +71,7 @@ import PanelGroup from './components/PanelGroup';
 import AbstractTable from '@/components/AbstractTable/AbstractTable';
 import SyncResource from '@/api/sync';
 import pagination from '@/components/Pagination';
+import BlockchainCurrencyResource from '@/api/finances/blockchain-currency';
 
 const lineChartData = {
   newVisitis: {
@@ -89,7 +96,7 @@ export default {
   name: 'DashboardAdmin',
   components: {
     PanelGroup,
-    // LineChart,
+    LineChart,
     // RaddarChart,
     // PieChart,
     // BarChart,
@@ -112,14 +119,39 @@ export default {
         FAILED: 'danger',
       },
       lineChartData: lineChartData.newVisitis,
+      currencyData: {
+        analytics: {},
+        dates: [],
+        values: [],
+        legend: [],
+      },
     };
   },
   created() {
-    this.fetchSyncronizrion();
+    this.fetchData();
   },
   methods: {
     handleSetLineChartData(type) {
       this.lineChartData = lineChartData[type];
+    },
+    async fetchData() {
+      this.load = true;
+      try {
+        await this.fetchSyncronizrion();
+        await this.fetchBlockchainCurrency();
+      } catch (e) {
+        console.log(e);
+      } finally {
+        this.load = false;
+      }
+    },
+    async fetchBlockchainCurrency() {
+      try {
+        const { data } = await (new BlockchainCurrencyResource()).graph();
+        this.currencyData = data;
+      } catch (e) {
+        console.log(e);
+      }
     },
     async fetchSyncronizrion() {
       try {
@@ -130,8 +162,6 @@ export default {
         this.query.limit = parseInt(data.per_page);
       } catch (e) {
         console.log(e);
-      } finally {
-        this.load = false;
       }
     },
   },

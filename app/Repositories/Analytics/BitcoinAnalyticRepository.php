@@ -37,6 +37,21 @@ class BitcoinAnalyticRepository implements BitcoinAnalyticRepositoryInterface
         }
     }
 
+    public function graphFormat(): array {
+        $rawAnalytics = BitcoinCurrencyAnalytics::query()->orderBy('created_at')->get();
+        $values = $rawAnalytics->sortByDesc('buy_value')->pluck('buy_value')->unique()->values()->all();
+        $dates = $rawAnalytics
+            ->sortBy('created_at')
+            ->pluck('created_at')
+            ->map(fn($carbonItem) => ($carbonItem->format('Y-m-d')))
+            ->unique()->values()->all();
+        $analytics = $rawAnalytics->groupBy('char_code')
+            ->map(fn (\Illuminate\Database\Eloquent\Collection $collection) => ($collection->sortBy('created_at')->pluck('buy_value')))
+            ->toArray();
+        $legend = array_keys($analytics);
+        return compact('values', 'dates', 'analytics',  'legend');
+    }
+
     public function create(array $data): Model
     {
        return BitcoinCurrencyAnalytics::query()->create($data);
