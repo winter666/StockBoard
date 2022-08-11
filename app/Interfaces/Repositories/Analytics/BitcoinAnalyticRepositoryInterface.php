@@ -5,13 +5,9 @@ namespace App\Interfaces\Repositories\Analytics;
 
 
 use App\Interfaces\Repositories\ModelRepository;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 
 interface BitcoinAnalyticRepositoryInterface extends ModelRepository
 {
-    public function create(array $data): Model;
-
-    public function storeOnceADay(array $needle, array $data);
-
-    public function graphFormat(): array;
+    public function getOrderLatest(): Collection;
 }

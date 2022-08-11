@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\Analytics\BitcoinAnalyticRepository;
+use App\Services\Analytic\Blockchain\GetBlockchainCurrencyAnalyticService;
 use Illuminate\Http\Request;
 
 class BlockchainCurrencyController extends Controller
@@ -84,8 +85,8 @@ class BlockchainCurrencyController extends Controller
         //
     }
 
-    public function graph(Request $request, BitcoinAnalyticRepository $bitcoinAnalyticRepository)
+    public function graph(Request $request, GetBlockchainCurrencyAnalyticService $service)
     {
-        return response()->json([ 'data' => $bitcoinAnalyticRepository->graphFormat() ]);
+        return response()->json([ 'data' => $service->run() ]);
     }
 }

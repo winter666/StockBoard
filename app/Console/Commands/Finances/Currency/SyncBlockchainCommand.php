@@ -22,9 +22,11 @@ class SyncBlockchainCommand extends Command
 
     public function handle(BitcoinCurrencyRepository $bitcoinCurrencyRepository, BitcoinAnalyticRepository $bitcoinAnalyticRepository)
     {
-        $tickerResponseBody = json_decode($this->api
-            ->ticker()
-            ->getBody());
+        $tickerResponseBody = json_decode(
+            $this->api
+                ->ticker()
+                ->getBody()
+        );
 
         foreach ($tickerResponseBody as $key => $tick) {
             $data = [
@@ -35,7 +37,7 @@ class SyncBlockchainCommand extends Command
             ];
 
             $bitcoinCurrencyRepository->updateOrCreate(['char_code' => $data['char_code']], $data);
-            $bitcoinAnalyticRepository->storeOnceADay(['char_code' => $data['char_code']], $data);
+            $bitcoinAnalyticRepository->create($data);
         }
 
         return 0;
