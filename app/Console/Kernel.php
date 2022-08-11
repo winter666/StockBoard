@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command(SyncBlockchainCommand::class)->everyThirtyMinutes();
+        $schedule->command(SyncBlockchainCommand::class)->everyFifteenMinutes();
     }
 
     /**
