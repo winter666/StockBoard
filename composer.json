@@ -1,13 +1,14 @@
 {
-    "name": "tuandm/laravue",
+    "name": "winter666/stockboard-app",
     "type": "project",
-    "description": "A beautiful dashboard for Laravel built by VueJS",
+    "description": "API & admin panel for stock-board App",
     "keywords": [
         "laravel",
         "laravue",
         "vue",
         "admin",
-        "dashboard"
+        "dashboard",
+        "stockboard"
     ],
     "license": "MIT",
     "authors": [
@@ -15,7 +16,12 @@
             "name": "Tuan Duong",
             "email": "bacduong@gmail.com",
             "homepage": "https://laravue.dev",
-            "role": "Developer"
+            "role": "Developer on Platform"
+        },
+        {
+            "name": "Davut Sergeev",
+            "email": "sergeevdavut@mail.ru",
+            "role": "Developer on Project"
         }
     ],
     "require": {
